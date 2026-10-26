@@ -1,0 +1,15 @@
+{
+  "name": "agentic-hub",
+  "version": "0.1.0",
+  "private": true,
+  "description": "The open registry of skills and agent packages for Agentic.",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "check": "node tools/check.mjs",
+    "index": "node tools/check.mjs --write-index"
+  },
+  "devDependencies": {
+    "yaml": "2.9.1"
+  }
+}

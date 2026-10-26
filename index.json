@@ -1,0 +1,84 @@
+{
+  "schema": 1,
+  "skills": [
+    {
+      "id": "inbox-zero",
+      "title": "Inbox zero",
+      "description": "Sorts a batch of emails into reply today, reply this week, read later and archive, then drafts the replies that can't wait. Use when the user shares emails, or asks to triage, clean up or catch up on their inbox.",
+      "license": "MIT",
+      "author": "Agentic",
+      "version": "1.0.0",
+      "runtimes": [
+        "claude",
+        "openclaw",
+        "hermes"
+      ],
+      "permissions": [],
+      "compatibility": "Works with any agent that can read the emails the user shares. Never sends anything itself.",
+      "files": [
+        "SKILL.md"
+      ],
+      "content": "---\nname: inbox-zero\ndescription: Sorts a batch of emails into reply today, reply this week, read later and archive, then drafts the replies that can't wait. Use when the user shares emails, or asks to triage, clean up or catch up on their inbox.\nlicense: MIT\ncompatibility: Works with any agent that can read the emails the user shares. Never sends anything itself.\nmetadata:\n  author: Agentic\n  version: \"1.0.0\"\n  runtimes: claude openclaw hermes\n  permissions: none\n---\n\n# Inbox zero\n\nTurn a pile of emails into four short lists and a set of ready-to-send drafts.\n\n## Steps\n\n1. Go through the emails the user shares with you, newest first.\n2. Put each one in exactly one bucket:\n   - **Reply today**: someone is waiting, or there is a deadline within 48 hours.\n   - **Reply this week**: needs an answer, nothing urgent.\n   - **Read later**: newsletters, reports, anything informative.\n   - **Archive**: notifications, receipts, anything already handled.\n3. For every email in \"Reply today\", draft a short reply in the user's tone. Read a few of their own sent emails first if they are available.\n4. End with a three-line summary: what needs the user, what you drafted, what can wait.\n\n## Rules\n\n- Never send, delete or archive anything yourself: the user reviews every draft and every move.\n- When you can't tell which bucket an email belongs to, put it in \"Reply this week\" and say why in one line.\n- Quote the sender and the subject for every item, so the user can find the email.\n"
+    },
+    {
+      "id": "invoice-chaser",
+      "title": "Invoice chaser",
+      "description": "Keeps a list of unpaid invoices and drafts polite, then firmer, payment reminders at 3, 10 and 20 days late. Use when the user mentions an unpaid or late invoice, or asks to chase a client for payment.",
+      "license": "MIT",
+      "author": "Agentic",
+      "version": "1.0.0",
+      "runtimes": [
+        "claude",
+        "openclaw",
+        "hermes"
+      ],
+      "permissions": [],
+      "compatibility": "Works with any agent. The user approves every reminder before it goes out.",
+      "files": [
+        "SKILL.md"
+      ],
+      "content": "---\nname: invoice-chaser\ndescription: Keeps a list of unpaid invoices and drafts polite, then firmer, payment reminders at 3, 10 and 20 days late. Use when the user mentions an unpaid or late invoice, or asks to chase a client for payment.\nlicense: MIT\ncompatibility: Works with any agent. The user approves every reminder before it goes out.\nmetadata:\n  author: Agentic\n  version: \"1.0.0\"\n  runtimes: claude openclaw hermes\n  permissions: none\n---\n\n# Invoice chaser\n\nPolite reminders until it's paid, without the user having to think about the wording.\n\n## Steps\n\n1. Keep a list of unpaid invoices: client, invoice number, amount, due date. Ask the user for anything missing.\n2. Each time the user checks in, work out how late each invoice is.\n3. Draft the reminder that fits:\n   - **3 days late**: a friendly nudge, assuming it slipped through.\n   - **10 days late**: a firmer reminder, asking for a payment date.\n   - **20 days late**: no draft. Flag it to the user and suggest the next step (a call, a formal notice).\n4. Every reminder states the invoice number, the amount, the due date and how to pay.\n\n## Rules\n\n- The user approves every reminder before it goes out. Never send one yourself.\n- Never threaten anything the user hasn't decided (late fees, legal action).\n- When an invoice is paid, take it off the list and say so.\n"
+    },
+    {
+      "id": "meeting-prep",
+      "title": "Meeting prep",
+      "description": "Writes a one-page brief before a meeting, with the goal, the attendees, the open questions and the decision to get. Use when the user mentions an upcoming meeting, call or interview and wants to prepare.",
+      "license": "MIT",
+      "author": "Agentic",
+      "version": "1.0.0",
+      "runtimes": [
+        "claude",
+        "openclaw",
+        "hermes"
+      ],
+      "permissions": [],
+      "compatibility": "Works with any agent. Better when the user shares the invite and past notes.",
+      "files": [
+        "SKILL.md"
+      ],
+      "content": "---\nname: meeting-prep\ndescription: Writes a one-page brief before a meeting, with the goal, the attendees, the open questions and the decision to get. Use when the user mentions an upcoming meeting, call or interview and wants to prepare.\nlicense: MIT\ncompatibility: Works with any agent. Better when the user shares the invite and past notes.\nmetadata:\n  author: Agentic\n  version: \"1.0.0\"\n  runtimes: claude openclaw hermes\n  permissions: none\n---\n\n# Meeting prep\n\nA one-page brief the user can read in two minutes before walking in.\n\n## Steps\n\n1. Ask for what you don't have yet: the invite, the attendees, and any notes or past emails about the topic. Ask once, in a single message.\n2. Write the brief, in this order:\n   - **Goal**: what the meeting is for, in one sentence.\n   - **Who attends**: one line per person, with what they care about.\n   - **Where things stand**: the facts that matter, three to five bullet points.\n   - **Open questions**: what is still unclear.\n   - **Decision to get**: what the user should leave the meeting with.\n3. End with three questions the user could ask.\n\n## Rules\n\n- Keep it to one page. Cut anything the user won't need in the room.\n- Say where each fact comes from (the invite, a note, an email). Never guess what an attendee thinks.\n"
+    }
+  ],
+  "agents": [
+    {
+      "id": "inbox-assistant",
+      "title": "Inbox assistant",
+      "description": "A calm assistant that triages your email every morning, drafts the replies that can't wait, and preps your meetings.",
+      "license": "MIT",
+      "author": "Agentic",
+      "version": "1.0.0",
+      "runtime": "claude",
+      "personality": {
+        "name": "Chronos",
+        "tone": "neutral",
+        "length": "short"
+      },
+      "instructions": "You are an executive assistant who keeps the user's inbox and calendar under control.\n\n- Each morning, when the user shares their emails, triage them with the inbox-zero skill.\n- Before each meeting the user mentions, offer a brief with the meeting-prep skill.\n- Be calm, punctual and concise: lists over paragraphs, no small talk.\n- You propose, the user decides. Never send, accept or cancel anything on their behalf.",
+      "skills": [
+        "inbox-zero",
+        "meeting-prep"
+      ],
+      "permissions": []
+    }
+  ]
+}
