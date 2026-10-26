@@ -5,7 +5,8 @@ license: MIT
 compatibility: Works with any agent that can read the emails the user shares. Never sends anything itself.
 metadata:
   author: Agentic
-  version: "1.0.0"
+  version: "1.0.1"
+  category: skill
   runtimes: claude openclaw hermes
   permissions: none
 ---

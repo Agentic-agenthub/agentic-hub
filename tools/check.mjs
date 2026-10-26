@@ -18,6 +18,7 @@ const SEMVER = /^\d+\.\d+\.\d+$/
 const LICENSES = new Set(["MIT", "Apache-2.0", "BSD-2-Clause", "BSD-3-Clause", "ISC", "MPL-2.0", "CC0-1.0", "CC-BY-4.0"])
 const RUNTIMES = ["claude", "openclaw", "hermes"]
 const PERMISSIONS = ["email.read", "email.send", "calendar.read", "calendar.write", "files.read", "files.write", "web", "network", "shell"]
+const CATEGORIES = ["skill", "workflow", "knowledge"]
 const TONES = ["friendly", "neutral", "formal"]
 const LENGTHS = ["short", "detailed"]
 const TEXT_FILES = new Set([".md", ".txt", ".json", ".yaml", ".yml", ".csv", ".py", ".sh", ".js", ".mjs", ".ts"])
@@ -153,6 +154,7 @@ function checkSkill(folder) {
   for (const [key, value] of Object.entries(meta)) if (typeof value !== "string") err(where, `metadata.${key} must be a string (quote it)`)
   if (typeof meta.author !== "string" || !meta.author.trim() || meta.author.length > LIMITS.author) err(where, "metadata.author is required")
   if (!SEMVER.test(meta.version ?? "")) err(where, 'metadata.version must look like "1.0.0" (quoted)')
+  if (meta.category !== undefined && !CATEGORIES.includes(meta.category)) err(where, `metadata.category must be one of: ${CATEGORIES.join(", ")}`)
   const runtimes = words(meta.runtimes)
   if (runtimes.length === 0) err(where, `metadata.runtimes must list the engines it was tested on: ${RUNTIMES.join(" ")}`)
   for (const r of runtimes) if (!RUNTIMES.includes(r)) err(where, `unknown runtime "${r}". Allowed: ${RUNTIMES.join(", ")}`)
@@ -183,6 +185,7 @@ function checkSkill(folder) {
     license: data.license,
     author: meta.author,
     version: meta.version,
+    category: meta.category ?? "skill",
     runtimes,
     permissions,
     compatibility: data.compatibility ?? null,

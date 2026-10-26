@@ -5,7 +5,8 @@ license: MIT
 compatibility: Works with any agent. Better when the user shares the invite and past notes.
 metadata:
   author: Agentic
-  version: "1.0.0"
+  version: "1.0.1"
+  category: skill
   runtimes: claude openclaw hermes
   permissions: none
 ---
