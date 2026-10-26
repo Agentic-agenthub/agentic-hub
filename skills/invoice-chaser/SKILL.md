@@ -5,7 +5,8 @@ license: MIT
 compatibility: Works with any agent. The user approves every reminder before it goes out.
 metadata:
   author: Agentic
-  version: "1.0.0"
+  version: "1.0.1"
+  category: workflow
   runtimes: claude openclaw hermes
   permissions: none
 ---

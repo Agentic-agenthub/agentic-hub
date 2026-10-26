@@ -32,6 +32,7 @@ What the agent should do, step by step.
 | `compatibility` | no | What it needs to work well. 500 characters max. |
 | `metadata.author` | yes | You, or your organization. |
 | `metadata.version` | yes | `"1.0.0"`, quoted. Raise it with every change. |
+| `metadata.category` | no | `skill` (default), `workflow` (a routine on a schedule) or `knowledge` (answers from documents). |
 | `metadata.runtimes` | yes | The engines you **tested** it on, space-separated: `claude`, `openclaw`, `hermes`. |
 | `metadata.permissions` | yes | `none`, or what it needs, space-separated: `email.read` `email.send` `calendar.read` `calendar.write` `files.read` `files.write` `web` `network` `shell`. |
 
